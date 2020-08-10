@@ -101,7 +101,7 @@ test for qualean string for repr()
 test string representation in readable form
 
 ## 14. test_qualean_float : 
-test conversion to float
+test conversion to float from qualean. The state attribute is used to convert to float
 
 ## 15. test_qualean_ge_inequality : 
 Check for the greater than or equal to ineqaulity of qualeans
@@ -116,45 +116,22 @@ Check for the lesser than or equal to ineqaulity of qualeans
 Check for the lesser than or equal to ineqaulity of qualeans
 
 ## 19. test_sign_inversion : 
-Check sign inversion
+Test to check the inversion of sign for a qualean. sum of qualean and it's sign inversion should be 0
 
 ## 20. test_qual_to_bool : 
-Check qual to bool conversion
+Check qual to bool conversion. It the state attribute is 0, it returns false else true
 
-## 21. test_qual_addition : 
-Test for readme exists
+## 21. test_qualean_negative_square_root : 
+Check the square root for qualean with state less than zero is a complex number
 
-## 22. test_qual_multiplication : 
-Test for readme exists
+## 22. test_qual_creation : 
+Check for the value passed to constructor for Qualean is either of 1,0 or -1. If anything else is passed, raise error.
 
-## 23. test_boolen_not_by_sign_invert : 
-Test for readme exists
+## 23. test_qual_multiplication : 
+Check for multiplication only Qualean, Decimal, int and float types input
 
-## 24. test_le_by_invert : 
-Test for readme exists
+## 24. test_qual_add : 
+Check for addition is allowed for Qualean, Decimal, int and float types input
 
-## 25. test_ge_by_sign_invert : 
-Test for readme exists
-
-## 26. test_le_by_invert : 
-Test for readme exists
-
-## 27. test_ge_by_sign_invert : 
-Test for readme exists
-
-## 28. test_readme_exists : 
-Test for readme exists
-
-## 29. test_readme_exists : 
-Test for readme exists
-
-## 30. test_readme_exists : 
-Test for readme exists
-
-
-
-
-
-
-
-
+## 25. test_qualean_inequality : 
+Test for ge, gt, le, lt should be allowed only between Qualeans

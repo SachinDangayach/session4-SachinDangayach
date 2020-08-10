@@ -32,5 +32,9 @@
   "test_session4.py::test_qualean_lt_inequality",
   "test_session4.py::test_sign_inversion",
   "test_session4.py::test_qual_to_bool",
-  "test_session4.py::test_qualean_negative_square_root"
+  "test_session4.py::test_qualean_negative_square_root",
+  "test_session4.py::test_qual_creation",
+  "test_session4.py::test_qual_multiplication",
+  "test_session4.py::test_qual_add",
+  "test_session4.py::test_qualean_inequality"
 ]

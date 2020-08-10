@@ -95,7 +95,14 @@ def test_qualean_negative_square_root():
 
 def test_normal_dist_state():
     """sum of 1 million different qs is very close to zero (use isclose)"""
-    pass
+    # this is not going to be close to zero as random.choice * Qual is not uniformly
+    # distributed and hence mean will not be near to zero
+    a = session4.Qualean(0)
+    for i in range(1000000):
+        state = random.choice([-1,0,1])
+        q  = session4.Qualean(state)
+        a = a + q
+        assert math.isclose(a,0, abs_tol=1000) , "Sum of 1 million different qs is not very close to zero (use isclose)"
 
 def test_boolean_and():
     """# q1 and q2 returns False when q1 or q2 is False"""
@@ -194,3 +201,33 @@ def test_qual_to_bool():
         state = random.choice([-1,0,1])
         q = session4.Qualean(state)
         assert isinstance(q.__bool__(),bool), f'Qualean number to boolean conversion does not meet expectations'
+
+def test_qual_creation():
+    """Check for the creation of Qualean, only states [0,1 and -1] is allowed"""
+    with pytest.raises(ValueError) as info:
+        session4.Qualean('abc')
+    with pytest.raises(ValueError):
+        session4.Qualean(100)
+    with pytest.raises(ValueError):
+        session4.Qualean(1.1)
+
+def test_qual_multiplication():
+    """Check for multiplication only Qualean, Decimal, int and float"""
+    with pytest.raises(NotImplementedError) as info:
+        session4.Qualean(1) * 'hi'
+
+def test_qual_add():
+    """Check for addition only Qualean, Decimal, int and float"""
+    with pytest.raises(NotImplementedError) as info:
+        session4.Qualean(1) + 'hi'
+
+def test_qualean_inequality():
+    """Check for ineqaulity only for Qualean"""
+    with pytest.raises(NotImplementedError) as info:
+        session4.Qualean(1) <= 'hi'
+    with pytest.raises(NotImplementedError) as info:
+        session4.Qualean(1) >= 'hi'
+    with pytest.raises(NotImplementedError) as info:
+        session4.Qualean(1) < 'hi'
+    with pytest.raises(NotImplementedError) as info:
+        session4.Qualean(1) > 'hi'
