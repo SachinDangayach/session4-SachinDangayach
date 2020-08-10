@@ -1,0 +1,21 @@
+[
+  "test_session4.py::test_readme_exists",
+  "test_session4.py::test_readme_contents",
+  "test_session4.py::test_readme_proper_description",
+  "test_session4.py::test_readme_file_for_formatting",
+  "test_session4.py::test_indentations",
+  "test_session4.py::test_function_name_had_cap_letter",
+  "test_session4.py::test_invalid_base_valueerror",
+  "test_session4.py::test_invalid_base_valueerror_provides_relevant_message",
+  "test_session4.py::test_innacurate_digit_map_length",
+  "test_session4.py::test_hexadecimal_conversions",
+  "test_session4.py::test_negative_hexadecimal_conversions",
+  "test_session4.py::test_repeating_digits_in_digit_map",
+  "test_session4.py::test_repeating_digits_valueerror_provides_relevant_message",
+  "test_session4.py::test_float_equality_testing",
+  "test_session4.py::test_things_not_allowed",
+  "test_session4.py::test_fraction_used_or_not",
+  "test_session4.py::test_manual_truncation_function",
+  "test_session4.py::test_manual_rounding_function",
+  "test_session4.py::test_functions_for_zero"
+]

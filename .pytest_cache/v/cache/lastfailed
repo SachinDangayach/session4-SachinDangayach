@@ -1,0 +1,15 @@
+{
+  "test_session4.py::test_float_equality_testing": true,
+  "test_session4.py::test_fraction_used_or_not": true,
+  "test_session4.py::test_functions_for_zero": true,
+  "test_session4.py::test_hexadecimal_conversions": true,
+  "test_session4.py::test_innacurate_digit_map_length": true,
+  "test_session4.py::test_invalid_base_valueerror": true,
+  "test_session4.py::test_invalid_base_valueerror_provides_relevant_message": true,
+  "test_session4.py::test_manual_rounding_function": true,
+  "test_session4.py::test_manual_truncation_function": true,
+  "test_session4.py::test_negative_hexadecimal_conversions": true,
+  "test_session4.py::test_repeating_digits_in_digit_map": true,
+  "test_session4.py::test_repeating_digits_valueerror_provides_relevant_message": true,
+  "test_session4.py::test_things_not_allowed": true
+}

@@ -3,10 +3,6 @@ from decimal import Decimal
 import random
 import math
 
-decimal.getcontext().prec = 10
-decimal.getcontext().rounding = decimal.ROUND_HALF_EVEN
-
-
 """ Qualean class based on Boolean+Quantum concepts """
 class Qualean:
     """Qualean class based on Boolean and Quantan concepts"""
@@ -42,10 +38,14 @@ class Qualean:
 
     def __and__(self,other):
         """Return boolean and"""
+        if isinstance(other, Qualean):
+            raise NotImplementedError('Incorrect data type')
         return bool(self.state) and bool(other.state)
 
     def __or__(self,other):
         """Return boolean or"""
+        if isinstance(other, Qualean):
+            raise NotImplementedError('Incorrect data type')
         return bool(self.state) or bool(other.state)
 
     def __eq__(self, other):
@@ -53,7 +53,7 @@ class Qualean:
         if isinstance(other, Qualean):
             return(self.state==other.state)
         else:
-            return NotImplemented
+            raise NotImplementedError('Incorrect data type')
 
     def __float__(self):
         """ Type cast to float """
@@ -64,14 +64,14 @@ class Qualean:
         if isinstance(other, Qualean):
             return(self.state >= other.state)
         else:
-            return NotImplemented
+            raise NotImplementedError('Incorrect data type')
 
     def __gt__(self,other):
         """ Check for the greater than ineqaulity of qualeans"""
         if isinstance(other, Qualean):
             return(self.state > other.state)
         else:
-            return NotImplemented
+            raise NotImplementedError('Incorrect data type')
 
     def __invertsign__(self):
         """ Invert the sign of qualean"""
@@ -83,71 +83,71 @@ class Qualean:
         if isinstance(other, Qualean):
             return(self.state <= other.state)
         else:
-            return NotImplemented
+            raise NotImplementedError('Incorrect data type')
 
     def __lt__(self,other):
         """ Check for the lesser than ineqaulity of qualeans"""
         if isinstance(other, Qualean):
             return(self.state < other.state)
         else:
-            return NotImplemented
+            raise NotImplementedError('Incorrect data type')
 
     def __add__(self, other):
         "Add to qualean"
-        with decimal.localcontext() as ctx:
-            ctx.prec = 10
-            ctx.rounding = decimal.ROUND_HALF_EVEN
+        with decimal.localcontext() as ctxa:
+            ctxa.prec = 10
+            ctxa.rounding = decimal.ROUND_HALF_EVEN
             if isinstance(other, (int,float,Decimal)):
-                other = Decimal(other,ctx)
+                other = Decimal(other,ctxa)
                 result = Qualean(0)
-                result._state = self.state + other
+                result._state = Decimal(self.state + other, ctxa)
                 return result
             elif isinstance(other,Qualean):
                 result = Qualean(0)
-                result._state = self.state + other.state
+                result._state = Decimal(self.state + other.state, ctxa)
                 return result
             else:
-                return NotImplemented
+                raise NotImplementedError('Incorrect data type')
 
     def __iadd__(self, other):
         "Add to qualean"
-        with decimal.localcontext() as ctx:
-            ctx.prec = 10
-            ctx.rounding = decimal.ROUND_HALF_EVEN
+        with decimal.localcontext() as ctxa:
+            ctxa.prec = 10
+            ctxa.rounding = decimal.ROUND_HALF_EVEN
             if isinstance(other, (int,float,Decimal)):
-                other = Decimal(other,ctx)
+                other = Decimal(other,ctxa)
                 result = Qualean(0)
-                result._state = self.state + other
+                result._state = Decimal(self.state + other, ctxa)
                 return result
             elif isinstance(other,Qualean):
                 result = Qualean(0)
-                result._state = self.state + other.state
+                result._state = Decimal(self.state + other.state, ctxa)
                 return result
             else:
-                return NotImplemented
+                raise NotImplementedError('Incorrect data type')
 
     def __mul__(self, other):
         "Multiply to qualean"
-        with decimal.localcontext() as ctx:
-            ctx.prec = 10
-            ctx.rounding = decimal.ROUND_HALF_EVEN
+        with decimal.localcontext() as ctxm:
+            ctxm.prec = 10
+            ctxm.rounding = decimal.ROUND_HALF_EVEN
             if isinstance(other, (int,float,Decimal)):
-                other = Decimal(other,ctx)
+                other = Decimal(other,ctxm)
                 result = Qualean(0)
-                result._state = self.state * other
+                result._state = Decimal(self.state * other, ctxm)
                 return result
             elif isinstance(other,Qualean):
                 result = Qualean(0)
-                result._state = self.state * other.state
+                result._state = Decimal(self.state * other.state, ctxm)
                 return result
             else:
-                return NotImplemented
+                raise NotImplementedError('Incorrect data type')
 
     def __sqrt__(self):
         "Square root of qualean"
-        with decimal.localcontext() as ctx:
-            ctx.prec = 10
-            ctx.rounding = decimal.ROUND_HALF_EVEN
+        with decimal.localcontext() as ctxs:
+            ctxs.prec = 10
+            ctxs.rounding = decimal.ROUND_HALF_EVEN
             if self.state > 0:
                 return self.state.sqrt()
             else:
