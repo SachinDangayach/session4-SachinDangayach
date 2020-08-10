@@ -52,6 +52,8 @@ class Qualean:
         """ Check for the equality of qualeans"""
         if isinstance(other, Qualean):
             return(self.state==other.state)
+        elif isinstance(other, bool):
+            return(bool(self)==other)
         else:
             raise NotImplementedError('Incorrect data type')
 
@@ -75,7 +77,7 @@ class Qualean:
 
     def __invertsign__(self):
         """ Invert the sign of qualean"""
-        self._state = self.state * -1
+        self = self * -1
         return self
 
     def __le__(self,other):
@@ -156,3 +158,14 @@ class Qualean:
     def __bool__(self):
         "Return False if state is 0 else True"
         return bool(self.state)
+
+def check_qualean_addition(qual, n):
+    """Test the qualean addition"""
+    with decimal.localcontext() as ctx1:
+        ctx1.prec = 10
+        ctx1.rounding = decimal.ROUND_HALF_EVEN
+        qsum = Qualean(0)
+        for i in range(n):
+            qsum = qsum + qual
+        prod = qual * n
+    return round(qsum.state,6) == round(prod.state,6)

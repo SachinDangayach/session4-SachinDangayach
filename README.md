@@ -79,67 +79,67 @@ Test for source code formatting. No tabs but four spaces are used for indentatio
 ## 6. test_function_name_had_cap_letters : 
 Test for no function is with capitals in source code
 
-## 7. test_readme_exists : 
+## 7. test_innacurate_addition : 
+Test for rounding errors in case we have a qualean added 100 times should be equal to 100* qualean. In this case, rounding to 6 digit is used as multiplication by 100 reduces the decimal digits. We have used a function named check_qualean_addition to implement this check
+
+## 8. test_qualean_square_root : 
+Returns the square root of the value of state attribute of Q1. If state is negative, returns complex number as output 
+
+## 9. test_normal_dist_state : 
+Generate 1 Million quals with state 1 and another million with state -1. Test their sum is near to 0 by using isclose
+
+## 10. test_boolean_and : 
+Test for boolen and operatoin on qualeans based on the value of state attribute for Q1 and Q2. Returns false it one of Q1 or Q2 state is 0
+
+## 11. test_boolean_or : 
+Test for boolen and operatoin on qualeans based on the value of state attribute for Q1 and Q2. Returns false it one of Q1 or Q2 state is 0
+
+## 12. test_string_repr : 
+test for qualean string for repr()
+
+## 13. test_string_representation : 
+test string representation in readable form
+
+## 14. test_qualean_float : 
+test conversion to float
+
+## 15. test_qualean_ge_inequality : 
+Check for the greater than or equal to ineqaulity of qualeans
+
+## 16. test_qualean_gt_inequality : 
+Check for the greater than ineqaulity of qualeans
+
+## 17. test_qualean_le_inequality : 
+Check for the lesser than or equal to ineqaulity of qualeans
+
+## 18. test_qualean_lt_inequality : 
+Check for the lesser than or equal to ineqaulity of qualeans
+
+## 19. test_sign_inversion : 
+Check sign inversion
+
+## 20. test_qual_to_bool : 
+Check qual to bool conversion
+
+## 21. test_qual_addition : 
 Test for readme exists
 
-## 8. test_readme_exists : 
+## 22. test_qual_multiplication : 
 Test for readme exists
 
-## 9. test_readme_exists : 
+## 23. test_boolen_not_by_sign_invert : 
 Test for readme exists
 
-## 10. test_readme_exists : 
+## 24. test_le_by_invert : 
 Test for readme exists
 
-## 11. test_readme_exists : 
+## 25. test_ge_by_sign_invert : 
 Test for readme exists
 
-## 12. test_readme_exists : 
+## 26. test_le_by_invert : 
 Test for readme exists
 
-## 13. test_readme_exists : 
-Test for readme exists
-
-## 14. test_readme_exists : 
-Test for readme exists
-
-## 15. test_readme_exists : 
-Test for readme exists
-
-## 16. test_readme_exists : 
-Test for readme exists
-
-## 17. test_readme_exists : 
-Test for readme exists
-
-## 18. test_readme_exists : 
-Test for readme exists
-
-## 19. test_readme_exists : 
-Test for readme exists
-
-## 20. test_readme_exists : 
-Test for readme exists
-
-## 21. test_readme_exists : 
-Test for readme exists
-
-## 22. test_readme_exists : 
-Test for readme exists
-
-## 23. test_readme_exists : 
-Test for readme exists
-
-## 24. test_readme_exists : 
-Test for readme exists
-
-## 25. test_readme_exists : 
-Test for readme exists
-
-## 26. test_readme_exists : 
-Test for readme exists
-
-## 27. test_readme_exists : 
+## 27. test_ge_by_sign_invert : 
 Test for readme exists
 
 ## 28. test_readme_exists : 

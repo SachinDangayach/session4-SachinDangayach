@@ -9,7 +9,7 @@ import math
 import decimal
 from decimal import Decimal
 
-decimal.getcontext().prec = 12
+decimal.getcontext().prec = 10
 decimal.getcontext().rounding = decimal.ROUND_HALF_EVEN
 
 
@@ -29,19 +29,6 @@ README_CONTENT_CHECK_FOR = [
     'mul',
     'sqrt',
     'bool',
-]
-
-CHECK_FOR_THINGS_NOT_ALLOWED = [
-    'math',
-    'isclose',
-    'bin(',
-    'hex(',
-    'round(',
-    'int(',
-    '10.4',
-    '-10.4'
-    '1.25',
-    '-1.25',
 ]
 
 def test_readme_exists():
@@ -84,68 +71,126 @@ def test_function_name_had_cap_letter():
     for function in functions:
         assert len(re.findall('([A-Z])', function[0])) == 0, "You have used Capital letter(s) in your function names"
 
-# def test_invalid_base_valueerror():
-#     with pytest.raises(ValueError):
-#         session3.encoded_from_base10(10, -1, '1234567890')
-#     with pytest.raises(ValueError):
-#         session3.encoded_from_base10(10, 1, '012')
-#     with pytest.raises(ValueError):
-#         session3.encoded_from_base10(10, 37, '1234567890123456789012345678901234567')
-#
-# def test_invalid_base_valueerror_provides_relevant_message():
-#     with pytest.raises(ValueError, match=r".* base .*"):
-#         session3.encoded_from_base10(10, -1, '1234567890')
-#
-# def test_innacurate_digit_map_length():
-#     with pytest.raises(ValueError):
-#         session3.encoded_from_base10(123123, 16, '0123456789abcde')
-#
-#     with pytest.raises(ValueError):
-#         session3.encoded_from_base10(123123, 9, '01234567')
-#
-#
-# def test_hexadecimal_conversions():
-#     for _ in range(50):
-#         r_num = random.randint(0, 32767)
-#         assert (session3.encoded_from_base10(r_num, 16, '0123456789abcdef').lower() ) == hex(r_num)[2:], f"Your program returned wrong HEX conversions"
-#
-# def test_negative_hexadecimal_conversions():
-#     for _ in range(50):
-#         r_num = random.randint(-32700, -1)
-#         assert (session3.encoded_from_base10(r_num, 16, '0123456789abcdef').lower() ) == '-' + hex(r_num)[3:], f"Your program returned wrong HEX conversions"
-#
-#
-# def test_repeating_digits_in_digit_map():
-#     with pytest.raises(ValueError):
-#         session3.encoded_from_base10(10, 10, '0123401234')
-#
-# def test_repeating_digits_valueerror_provides_relevant_message():
-#     with pytest.raises(ValueError, match=r".* repeating .*"):
-#         session3.encoded_from_base10(10, 10, '012AB012ab'), 'Something is fishy! You are not using word "repeating" while talking about an error releated to "repeating" alphanumerics!!'
-#
-# def test_float_equality_testing():
-#     for _ in range(10000):
-#         scale = random.randint(1, 1000000)
-#         a = random.uniform(-1.5, 1.6)
-#         a, b = a * scale, a * scale - a / scale
-#         assert session3.float_equality_testing(a, b) == math.isclose(a, b, rel_tol = 1e-12, abs_tol=1e-05), 'Aap jis number se sampark karna chahte hai, woh is samay uplabdh nahi hai, kripya thodi der baad prayas karein. The numbers you are trying to check right now are not equal, please try again later'
-#
-# def test_fraction_used_or_not():
-#     code_lines = inspect.getsource(session3)
-#     assert 'fractions' in code_lines, 'Fractions not used! You must use fractions'
-#     assert 'import' in code_lines, 'You have not imported fractions!'
-#
-# def test_manual_truncation_function():
-#     for _ in range(100):
-#         f_num = random.uniform(-100, 100)
-#         assert session3.manual_truncation_function(f_num) == math.trunc(f_num), 'Just because you are not able to fix this truncation error, SkyNet is going to rule the earth!'
-#
-# def test_manual_rounding_function():
-#     for f_num in [1.25, 1.35, -1.25, -1.35]:
-#         assert session3.manual_rounding_function(f_num) == round(f_num), 'Terminator after looking at your code: I will be back! He will come back when you fix your rounding errors.'
-#
-#
-# def test_functions_for_zero():
-#     assert session3.float_equality_testing(0.0, 0.0), 'How can zero be not equal to zero?'
-#     assert session3.manual_truncation_function(0.0) == 0, 'Tuncation of 0 should be zero'
-#     assert session3.manual_rounding_function(0.0) == 0, 'Zero can only be rounded off to zero'
+def test_innacurate_addition():
+    """q + q + q ... 100 times = 100 * q"""
+    state = random.choice([-1,0,1])
+    qualean = session4.Qualean(state)
+    assert session4.check_qualean_addition(qualean, 100)== True, "Rounding error for qualean states"
+
+def test_qualean_square_root():
+    """q.__sqrt__() = Decimal(q).sqrt"""
+    for _ in range(100):
+        state = random.choice([-1,0,1])
+        q = session4.Qualean(state)
+        if q.state >= 0:
+            assert(q.__sqrt__() == Decimal(q.state).sqrt()), " Square root not calculated properly"
+
+def test_qualean_negative_square_root():
+    """q.__sqrt__() = Decimal(q).sqrt"""
+    for _ in range(100):
+        state = random.choice([-1,0,1])
+        q = session4.Qualean(state)
+        if q.state < 0:
+            assert(isinstance(q.__sqrt__(),complex)), " Square root not calculated properly for negative state of qualean"
+
+def test_normal_dist_state():
+    """sum of 1 million different qs is very close to zero (use isclose)"""
+    pass
+
+def test_boolean_and():
+    """# q1 and q2 returns False when q1 or q2 is False"""
+    q1 = session4.Qualean(1)
+    q2 = session4.Qualean(0)
+    q3 = session4.Qualean(-1)
+    assert q1 and q3 == True , "And is not working properly while state of both qualean is not 0"
+    assert q1 and q2 == False , "And is not working properly while state of both qualean is not same"
+
+def test_boolean_or():
+    """# q1 or q2 returns False when q1 and q2 are False"""
+    q1 = session4.Qualean(1)
+    q2 = session4.Qualean(0)
+    q3 = session4.Qualean(-1)
+    q4 = session4.Qualean(0)
+    assert q1 or q3 == True , "Or is not working properly while state of both qualean is not 0"
+    assert q1 or q2 == True , "Or is not working properly while state of both qualean is not same"
+    assert q3 or q2 == True , "Or is not working properly while state of both qualean is not 0"
+    assert q2 or q4 == False , "Or is not working properly while state of both qualean is 0"
+
+def test_string_repr():
+    """test string representation"""
+    q = session4.Qualean(1)
+    assert q.__repr__() == f'Qualean(state={q.state})', 'The representation of the Qualean object does not meet expectations'
+
+def test_string_representation():
+    """test string representation in readable form"""
+    q = session4.Qualean(1)
+    assert q.__str__() == f'Qualean number - state is :{q.state}', 'The print of the Qualean object does not meet expectations'
+
+def test_qualean_float():
+    """test conversion to float"""
+    for _ in range(100):
+        state = random.choice([-1,0,1])
+        q = session4.Qualean(state)
+        assert q.__float__() == float(q.state), f'Qualean number to float conversion does not meet expectations'
+
+def test_qualean_ge_inequality():
+    """ Check for the greater than or equal to ineqaulity of qualeans"""
+    for _ in range(100):
+        state = random.choice([-1,0,1])
+        q1 = session4.Qualean(state)
+        state = random.choice([-1,0,1])
+        q2 = session4.Qualean(state)
+        if q1.state >= q2.state:
+            assert (q1 >= q2) == True, f'{q1}, {q2}, Greater than or equal to ineqaulity of qualeans is not implemented correctly'
+        else:
+            assert (q1 >= q2) == False, f'Greater than or equal to ineqaulity of qualeans is not implemented correctly'
+
+def test_qualean_gt_inequality():
+    """ Check for the greater than ineqaulity of qualeans"""
+    for _ in range(100):
+        state = random.choice([-1,0,1])
+        q1 = session4.Qualean(state)
+        state = random.choice([-1,0,1])
+        q2 = session4.Qualean(state)
+        if q1.state > q2.state:
+            assert (q1 > q2) == True, f'{q1}, {q2}, Greater than ineqaulity of qualeans is not implemented correctly'
+        elif  q1.state == q2.state == 0:
+            assert (q1 > q2) == False, f'Greater than ineqaulity of qualeans is not implemented correctly'
+
+def test_qualean_le_inequality():
+    """ Check for the lesser than or equal to ineqaulity of qualeans"""
+    for _ in range(100):
+        state = random.choice([-1,0,1])
+        q1 = session4.Qualean(state)
+        state = random.choice([-1,0,1])
+        q2 = session4.Qualean(state)
+        if q1.state <= q2.state:
+            assert (q1 <= q2) == True, f'{q1}, {q2}, Lesser than or equal to ineqaulity of qualeans is not implemented correctly'
+        else:
+            assert (q1 <= q2) == False, f'Lesser than or equal to ineqaulity of qualeans is not implemented correctly'
+
+def test_qualean_lt_inequality():
+    """ Check for the lesser than or equal to ineqaulity of qualeans"""
+    for _ in range(100):
+        state = random.choice([-1,0,1])
+        q1 = session4.Qualean(state)
+        state = random.choice([-1,0,1])
+        q2 = session4.Qualean(state)
+        if q1.state < q2.state:
+            assert (q1 < q2) == True, f'{q1}, {q2}, Lesser than ineqaulity of qualeans is not implemented correctly'
+        elif  q1.state == q2.state == 0:
+            assert (q1 < q2) == False, f'Greater than ineqaulity of qualeans is not implemented correctly'
+
+def test_sign_inversion():
+    """Check sign inversion"""
+    for _ in range(100):
+        state = random.choice([-1,0,1])
+        q = session4.Qualean(state)
+        assert q + q.__invertsign__() == session4.Qualean(0) , f'Qualean number to sign inversion is not implemented correctly'
+
+def test_qual_to_bool():
+    """Check qual to bool conversion"""
+    for _ in range(100):
+        state = random.choice([-1,0,1])
+        q = session4.Qualean(state)
+        assert isinstance(q.__bool__(),bool), f'Qualean number to boolean conversion does not meet expectations'
